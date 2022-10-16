@@ -8,18 +8,23 @@ public class MoodAnalyzer {
 		this.message = message;
 	}
 
-	public String analyseMood() {
+	public String analyseMood() throws MoodAnalysisException {
 		try {
+			if (message.length() == 0) {
+				throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_EMPTY,
+						"Please enter VALID mood");
+			}
 			if (message.toLowerCase().contains("sad"))
 				return "SAD";
 			else
 				return "HAPPY";
 		} catch (NullPointerException e) {
-			return "HAPPY";
+			throw new MoodAnalysisException(MoodAnalysisException.ExceptionType.ENTERED_NULL,
+					"Please Enter VALID Mood");
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MoodAnalysisException {
 		MoodAnalyzer mood1 = new MoodAnalyzer("I'm in any mood ");
 		System.out.println(mood1.analyseMood());
 		MoodAnalyzer mood2 = new MoodAnalyzer("I am in Sad Mood");
