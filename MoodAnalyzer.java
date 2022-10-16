@@ -9,10 +9,14 @@ public class MoodAnalyzer {
 	}
 
 	public String analyseMood() {
-		if (message.toLowerCase().contains("sad"))
-			return "SAD";
-		else
+		try {
+			if (message.toLowerCase().contains("sad"))
+				return "SAD";
+			else
+				return "HAPPY";
+		} catch (NullPointerException e) {
 			return "HAPPY";
+		}
 	}
 
 	public static void main(String[] args) {
@@ -20,5 +24,7 @@ public class MoodAnalyzer {
 		System.out.println(mood1.analyseMood());
 		MoodAnalyzer mood2 = new MoodAnalyzer("I am in Sad Mood");
 		System.out.println(mood2.analyseMood());
+		MoodAnalyzer mood3 = new MoodAnalyzer("I am in Happy Mood");
+		System.out.println(mood3.analyseMood());
 	}
 }
